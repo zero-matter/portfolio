@@ -91,10 +91,13 @@ export function Hero() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => (window.location.href = `mailto:${hero.email}`)}
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  contactSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 <FaEnvelope className="mr-2" />
-                Email Me
+                Contact Me
               </Button>
             </motion.div>
 

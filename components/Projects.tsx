@@ -50,8 +50,14 @@ function ProjectItem({ project, delay }: ProjectItemProps) {
             {project.name}
           </motion.h3>
 
+          {/* Tagline - always visible on mobile, hover on desktop */}
           <motion.p
-            className="text-base sm:text-lg text-text-secondary max-w-2xl"
+            className="text-base sm:text-lg text-text-secondary max-w-2xl lg:hidden"
+          >
+            {project.tagline}
+          </motion.p>
+          <motion.p
+            className="hidden lg:block text-base sm:text-lg text-text-secondary max-w-2xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
@@ -59,9 +65,21 @@ function ProjectItem({ project, delay }: ProjectItemProps) {
             {project.tagline}
           </motion.p>
 
-          {/* Tech Stack - visible on hover */}
+          {/* Tech Stack - always visible on mobile, hover on desktop */}
+          <div className="flex flex-wrap gap-2 pt-2 lg:hidden">
+            {project.techStack.slice(0, 5).map((tech, idx) => (
+              <Badge key={idx} variant="default" size="sm">
+                {tech}
+              </Badge>
+            ))}
+            {project.techStack.length > 5 && (
+              <Badge variant="outline" size="sm">
+                +{project.techStack.length - 5}
+              </Badge>
+            )}
+          </div>
           <motion.div
-            className="flex flex-wrap gap-2 pt-2"
+            className="hidden lg:flex flex-wrap gap-2 pt-2"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
             transition={{ duration: 0.3, delay: 0.1 }}
